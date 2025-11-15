@@ -1,6 +1,6 @@
-# 🌌 AI Doppelgänger Dimension
+# 🌌 AI π Dimension
 
-**AI Doppelgänger Dimension** is a fun, chaotic, and creative web application that generates an alternate-universe version of a user based on their photo and personal details.  
+**AI π Dimension** is a fun, chaotic, and creative web application that generates an alternate-universe version of a user based on their photo and personal details.  
 Users can explore their fictional twin through interactive option-based panels instead of receiving all info at once.  
 Perfect for hackathons, demos, and AI experimentation.
 
@@ -19,13 +19,13 @@ After uploading their image and traits, the system generates:
 - A fictional **location with coordinates**
 - Many more selectable details
 
-Each user’s doppelgänger is saved to their account, making the experience persistent across logins.
+Each user’s π is saved to their account, making the experience persistent across logins.
 
 ---
 
 ## 🧠 Core Concept
 
-Instead of showing everything at once, the app reveals the doppelgänger in **separate, clickable sections**, such as:
+Instead of showing everything at once, the app reveals the π in **separate, clickable sections**, such as:
 
 - Alternate Date of Birth  
 - Personality  
@@ -48,7 +48,7 @@ The system collects:
 - **Height, weight, physical traits**
 - **Date of Birth**
 - **Optional personality or lifestyle traits**
-- **Chosen Doppelgänger Archetype**, such as:
+- **Chosen π Archetype**, such as:
 
   - Rich Millionaire  
   - Poor Villager  
@@ -94,7 +94,7 @@ Each detail is shown only when clicked:
 ## 🔐 Account System
 
 - Users must **create an account**.
-- Their doppelgänger is **saved** in the database.
+- Their π is **saved** in the database.
 - They can view it every time they log in.
 - They may **reset** to generate a brand new alternate version.
 
@@ -131,7 +131,7 @@ Nobody needs an alternate-universe version of themselves — yet it’s impossib
 
 1. User logs in → dashboard shown  
 2. Upload image + fill traits → choose archetype  
-3. AI generates the **Doppelgänger Portrait**  
+3. AI generates the **π Portrait**  
 4. Click to reveal:
    - Personality  
    - Backstory  

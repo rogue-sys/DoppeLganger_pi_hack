@@ -58,7 +58,7 @@ export default function ResultView({ profile }: { profile: any }) {
 
       {/* CHAT SECTION */}
       <div className="bg-gray-900/90 p-6 rounded-2xl">
-        <h4 className="text-lg font-semibold mb-3">Chat with Your Doppelgänger</h4>
+        <h4 className="text-lg font-semibold mb-3">Chat with Your π</h4>
 
         {/* Chat messages */}
         <div className="h-64 overflow-y-auto bg-black/20 p-4 rounded-xl space-y-3 border border-gray-700">

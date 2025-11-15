@@ -186,7 +186,7 @@ const App = () => {
         try {
             const docRef = doc(db, `artifacts/${appId}/users/${userId}/doppelganger`, 'profile');
             await setDoc(docRef, profile);
-            console.log("Doppelgänger profile saved successfully.");
+            console.log("π profile saved successfully.");
         } catch (e) {
             console.error("Error saving document: ", e);
         }
@@ -243,7 +243,7 @@ const App = () => {
         setCurrentStep('generating');
         const { name, realDob, physicalTraits, personalityTraits, archetype } = userInput;
 
-        const basePrompt = `Generate a complete, alternate-universe doppelgänger profile based on the archetype "${archetype}". The real-world input is: Name=${name}, DOB=${realDob}, Physical=${physicalTraits}, Personality=${personalityTraits}. The resulting doppelgänger must be bizarre, creative, and chaotic.`;
+        const basePrompt = `Generate a complete, alternate-universe π profile based on the archetype "${archetype}". The real-world input is: Name=${name}, DOB=${realDob}, Physical=${physicalTraits}, Personality=${personalityTraits}. The resulting π must be bizarre, creative, and chaotic.`;
 
         try {
             // STEP 1: Generate Text Details (Backstory, Location, Status, etc.)
@@ -281,11 +281,11 @@ const App = () => {
             setDoppelganger(finalProfile);
             setChatHistory([]);
             await saveDoppelganger(finalProfile);
-            setStatusMessage("Doppelgänger profile successfully generated and saved! Opening rift...");
+            setStatusMessage("π profile successfully generated and saved! Opening rift...");
             setCurrentStep('result');
 
         } catch (error) {
-            console.error("Doppelgänger generation failed:", error);
+            console.error("π generation failed:", error);
             setStatusMessage(`ERROR: Generation failed. ${error.message}`);
             setIsLoading(false);
             // Allow user to retry
@@ -308,7 +308,7 @@ const App = () => {
         setChatHistory(newHistory);
 
         try {
-            const chatSystemPrompt = `You are the AI Doppelgänger of the user. Your persona is a ${doppelganger.archetype} named ${doppelganger.name}. Your backstory is: ${doppelganger.backstory}. Respond in character, using weird, chaotic, and slightly cryptic language appropriate for your alternate universe. Keep responses under 3 sentences.`;
+            const chatSystemPrompt = `You are the AI π of the user. Your persona is a ${doppelganger.archetype} named ${doppelganger.name}. Your backstory is: ${doppelganger.backstory}. Respond in character, using weird, chaotic, and slightly cryptic language appropriate for your alternate universe. Keep responses under 3 sentences.`;
             
             // Construct conversation history for the API
             const historyForApi = newHistory.map(msg => ({
@@ -412,7 +412,7 @@ const App = () => {
                     About the Application
                 </h3>
                 <p className="text-gray-400 text-sm">
-                    The **AI Doppelgänger Dimension** uses the infinite, non-repeating nature of $\pi$ to conceptualize an alternate, chaotic version of yourself in a fictional universe.
+                    The **AI π Dimension** uses the infinite, non-repeating nature of $\pi$ to conceptualize an alternate, chaotic version of yourself in a fictional universe.
                 </p>
                 <p className="text-gray-400 text-sm">
                     1. **Input Reality:** Provide your real-world traits.
@@ -475,7 +475,7 @@ const App = () => {
             />
             <div>
                 <label className="block text-sm font-medium mb-2 text-purple-300" htmlFor="archetype">
-                    Chosen Doppelgänger Archetype
+                    Chosen π Archetype
                 </label>
                 <select
                     id="archetype"
@@ -566,7 +566,7 @@ const App = () => {
     );
 
     const renderResult = () => {
-        if (!doppelganger) return <p className="text-red-500">Error: Doppelgänger data missing.</p>;
+        if (!doppelganger) return <p className="text-red-500">Error: π data missing.</p>;
 
         // Simple parsing of the locationStats block (split by a common separator)
         const [locationBlock, statsBlock, statusBlock] = (doppelganger.locationStats || "").split('\n\n\n');
@@ -725,7 +725,7 @@ const App = () => {
                         &pi;
                     </h1>
                     <p className="text-xl sm:text-2xl font-mono tracking-widest text-purple-300 mt-2">
-                        AI Doppelgänger Dimension
+                        AI π Dimension
                     </p>
                 </header>
                 <main className="w-full flex justify-center px-4">

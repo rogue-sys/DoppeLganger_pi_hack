@@ -15,7 +15,7 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata = {
-  title: "π Dimension - AI Doppelgänger",
+  title: "π Dimension - AI π",
   description: "Create an alternate-universe twin powered by generative AI.",
 };
 

@@ -24,7 +24,7 @@ export default async function PiDimension() {
       <div className="text-center mb-10">
         <div className="text-6xl font-sans!  font-bold mb-2">π</div>
         <div className="text-xl  tracking-wide font-roboto-mono">
-          AI Doppelgänger Dimension
+          AI π Dimension
         </div>
       </div>
 
