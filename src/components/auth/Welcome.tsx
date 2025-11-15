@@ -23,29 +23,26 @@ export default function Welcome() {
               About the Application
             </h3>
             <p>
-              The <strong>AI Doppelgänger Dimension</strong> uses the infinite,
+              The <strong>AI π Dimension</strong> uses the infinite,
               non-repeating nature of π to conceptualize an alternate, chaotic
               version of yourself in a fictional universe.
             </p>
 
-            <ol className="list-decimal ml-4 space-y-2">
-              <li>
-                <strong>Input Reality</strong>: Provide your real-world traits.
-              </li>
-              <li>
-                <strong>Select Archetype</strong>: Choose a bizarre role for
-                your twin (e.g., Cyberpunk Hacker, Evil Twin).
-              </li>
-              <li>
-                <strong>Quantum Generation</strong>: We use the Gemini and
-                Imagen APIs to construct a full persona, including a backstory,
-                stats, and an exclusive AI portrait.
-              </li>
-              <li>
-                <strong>Chat Interface</strong>: Interact with your newly
-                created alternate self, who responds in character.
-              </li>
-            </ol>
+           <ol className="list-decimal ml-4 space-y-2">
+  <li>
+    <strong>Input Reality</strong>: Enter your real-world traits and characteristics.
+  </li>
+  <li>
+    <strong>Select Archetype</strong>: Choose a unique and imaginative role for your twin (e.g., Cyberpunk Hacker, Evil Twin, Medieval Knight).
+  </li>
+  <li>
+    <strong>Quantum Generation</strong>: The system generates a complete alternate persona, including a detailed backstory, personality traits, achievements, and a distinctive AI portrait.
+  </li>
+  <li>
+    <strong>Chat Interface</strong>: Engage with your newly created alternate self, who responds authentically in character.
+  </li>
+</ol>
+
           </div>
 
           <Link href="/register" className="block">

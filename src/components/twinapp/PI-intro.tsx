@@ -12,7 +12,7 @@ export default function PiIntro() {
       <div className="bg-[#1c0b2b] border border-purple-600/40 rounded-xl p-5 leading-relaxed text-purple-200 text-sm space-y-3">
         <h3 className="font-semibold text-purple-300">About the Application</h3>
         <p>
-          The <strong>AI Doppelgänger Dimension</strong> uses the infinite,
+          The <strong>AI π Dimension</strong> uses the infinite,
           non‑repeating nature of π to conceptualize an alternate, chaotic
           version of yourself in a fictional universe.
         </p>
