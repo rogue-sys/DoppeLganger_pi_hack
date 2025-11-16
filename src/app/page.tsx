@@ -20,10 +20,7 @@ export default async function PiDimension() {
               name={data?.user?.name}
               avatar={data?.profile?.profile_pic || data?.user?.profile_url}
             />
-            <div className="text-purple-400">
-              <p>{data?.user?.name}</p>
-              <p>{data?.user?.email}</p>
-            </div>
+           
           </Card>
         </div>
         <div className="px-6 pt-6">
