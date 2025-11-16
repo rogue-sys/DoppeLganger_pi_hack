@@ -74,7 +74,6 @@ export const authOptions: NextAuthOptions = {
             name: profile.name,
             profile_url: profile.image,
             provider: "google",
-            emailVerified: true,
             role: "user",
           });
         }
