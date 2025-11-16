@@ -17,6 +17,7 @@ export interface UserProfile {
 
   interests: string[];
   preference: string;
+  place: string;
 
   createdAt: Date;
 }
@@ -36,6 +37,7 @@ const UserProfileSchema = new mongoose.Schema<IUserProfile>(
       type: String,
       required: true, 
     },
+    
 
     imageUrls: {
       type: [String],
@@ -83,6 +85,11 @@ const UserProfileSchema = new mongoose.Schema<IUserProfile>(
     },
 
     preference: {
+      type: String,
+      default: "",
+    },
+
+    place: {
       type: String,
       default: "",
     },

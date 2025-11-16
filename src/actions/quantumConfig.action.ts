@@ -90,7 +90,7 @@ REQUIREMENTS:
 
     const userQuery = `
 USER TRAITS:
-- Name / Appearance Tag: ${profile.appearance}
+- Name / Appearance Tag: ${profile.name}
 - Actual Appearance: ${profile.appearance}
 - Date of Birth: ${profile.dateOfBirth}
 - Personality Keywords: ${profile.personality}
@@ -100,6 +100,7 @@ USER TRAITS:
 - Gender: ${profile.gender}
 - Interests: ${profile.interests.join(", ")}
 - Preference: ${profile.preference}
+- Place/Nationality: ${profile.place}
 
 SELECTED UNIVERSE INPUTS:
 - Archetype: "${quantumData.archetype}"

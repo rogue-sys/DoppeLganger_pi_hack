@@ -61,6 +61,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
       gender: "",
       interests: [],
       preference: "",
+      place: "", // ⬅⬅⬅ NEW FIELD ADDED HERE
     },
   });
 
@@ -70,6 +71,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
     form.reset({
       ...initialData,
       interests: initialData.interests || [],
+      place: initialData.place || "", // ⬅⬅⬅ NEW FIELD RESET
     });
 
     setInterestsInput((initialData.interests || []).join(", "));
@@ -142,6 +144,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
 
     return true;
   }
+
   useEffect(() => {
     const previews: string[] = [];
     additionalFiles.forEach((file) => {
@@ -170,6 +173,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
       JSON.stringify({
         ...values,
         interests: interestsArray,
+        place: values.place, // ⬅⬅⬅ ENSURED PLACE GOES IN PAYLOAD
       })
     );
 
@@ -203,6 +207,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                 )}
               </h2>
 
+              {/* PROFILE IMAGE */}
               <div className="flex justify-center mb-5">
                 <div
                   className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-purple-500 overflow-hidden cursor-pointer hover:opacity-80"
@@ -231,6 +236,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                 />
               </div>
 
+              {/* ADDITIONAL IMAGES */}
               <FormItem>
                 <FormLabel className="text-purple-300">
                   Additional images of you (min 3)
@@ -268,6 +274,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
               </FormItem>
 
               <div className="grid md:grid-cols-2 gap-5 ">
+                {/* NAME */}
                 <FormField
                   control={form.control}
                   name="appearance"
@@ -287,6 +294,8 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                     </FormItem>
                   )}
                 />
+
+                {/* DOB */}
                 <FormField
                   control={form.control}
                   name="dateOfBirth"
@@ -307,6 +316,8 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                     </FormItem>
                   )}
                 />
+
+                {/* PERSONALITY */}
                 <FormField
                   control={form.control}
                   name="personality"
@@ -326,6 +337,8 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                     </FormItem>
                   )}
                 />
+
+                {/* ADDITIONAL TRAITS */}
                 <FormField
                   control={form.control}
                   name="additionalTraits"
@@ -345,6 +358,8 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                     </FormItem>
                   )}
                 />
+
+                {/* VIBE */}
                 <FormField
                   control={form.control}
                   name="vibeStyle"
@@ -364,6 +379,8 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                     </FormItem>
                   )}
                 />
+
+                {/* SEXUALITY */}
                 <FormField
                   control={form.control}
                   name="sexuality"
@@ -383,6 +400,8 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                     </FormItem>
                   )}
                 />
+
+                {/* GENDER */}
                 <FormField
                   control={form.control}
                   name="gender"
@@ -400,49 +419,19 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="interests"
-                  render={() => (
-                    <FormItem>
-                      <FormLabel className="text-purple-300">
-                        Interests (comma separated)
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="e.g., Reading, Music, Travel"
-                          className="bg-[#1c0b2b]! border-purple-600/40"
-                          value={interestsInput}
-                          onChange={(e) => {
-                            const value = e.target.value;
-                            setInterestsInput(value);
-                            form.setValue(
-                              "interests",
-                              value
-                                .split(",")
-                                .map((s) => s.trim())
-                                .filter(Boolean),
-                              { shouldValidate: true }
-                            );
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
 
+                {/* PLACE — NEW FIELD */}
                 <FormField
                   control={form.control}
-                  name="preference"
+                  name="place"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-purple-300">
-                        Preference
+                        Place / Location
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Your preference"
+                          placeholder="Where are you from?"
                           className="bg-[#1c0b2b]! border-purple-600/40"
                           {...field}
                         />
@@ -452,21 +441,13 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                   )}
                 />
               </div>
+
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-purple-600 hover:bg-purple-700 py-5 flex items-center justify-center gap-2"
+                className="w-full bg-purple-600 hover:bg-purple-700 mt-5"
               >
-                {loading ? (
-                  <>
-                    <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
-                    Saving...
-                  </>
-                ) : initialData ? (
-                  "Save"
-                ) : (
-                  "→ Next: Mental Configuration"
-                )}
+                {loading ? "Saving..." : "Save & Continue"}
               </Button>
             </CardContent>
           </form>
