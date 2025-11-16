@@ -36,7 +36,7 @@ export default async function PiDimension() {
             </Link>
           </Card>
         </div>
-        <AppAboutSection latestRealities={[]} />
+        <AppAboutSection  />
       </div>
     );
   }
