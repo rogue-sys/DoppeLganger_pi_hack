@@ -40,7 +40,6 @@ export default function RealityResultPage() {
           toast.error(data.error || "Failed to fetch realities");
         }
       } catch (err) {
-        console.error(err);
         toast.error("Server call failed");
       } finally {
         setLoading(false);

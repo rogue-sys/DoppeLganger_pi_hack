@@ -73,7 +73,7 @@ export default function RealityLocation({
     })();
   }, []);
 
-  if (!L || !DefaultIcon) return null;
+  if (!L || !DefaultIcon || !lat || !lng) return null;
 
   return (
     <Card className="bg-[#12071c] border-purple-800/40 gap-2 p-5">

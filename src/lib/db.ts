@@ -23,7 +23,7 @@ export async function connectDB(): Promise<Connection> {
   if (!cached.promise) {
     cached.promise = mongoose
       .connect(MONGODB_URI, {
-        dbName: "foodlens",
+        dbName: "pie",
         bufferCommands: false,
       })
       .then((m) => {

@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import RealityLocation from "./RealityLocation";
+import Link from "next/link";
 
 export default function RealityView({
   reality,
@@ -26,14 +27,18 @@ export default function RealityView({
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 text-purple-200">
-      <BackButton />
+      <Link href={"/"}>
+        <button className="mb-6 px-4 py-2 bg-purple-700 rounded hover:bg-purple-800">
+          ← Back
+        </button>
+      </Link>
 
       <div className="grid md:grid-cols-3 gap-6">
         <Card className="bg-[#12071c] w-fit h-fit mx-auto border-purple-800/40 gap-2 p-5 shadow-lg">
           <div className="flex flex-col items-center text-center">
             <div className="w-full overflow-hidden rounded-l ">
               <Image
-                src={ "/defaultProfile.png"}
+                src={"/defaultProfile.png"}
                 alt="Portrait"
                 width={400}
                 height={500}
@@ -54,21 +59,39 @@ export default function RealityView({
 
         <div className="md:col-span-2 space-y-6">
           <Card className="bg-[#12071c] border-purple-800/40 gap-2 p-5">
-            <h3 className="text-lg font-semibold text-purple-300 flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-green-400" />
+            <h3 className="text-lg font-semibold text-green-400 flex items-center gap-2">
+              <CheckCircle2 className="w-5 h-5 " />
               Status: What is he doing now?
+            </h3>
+
+            <p className="mt-3 whitespace-pre-line text-purple-300">
+              {
+                gp.what_is_he_doing_now[gp.what_is_he_doing_now.length - 1]
+                  .content
+              }
+            </p>
+          </Card>
+
+          <RealityLocation
+            coordinates={
+              gp.what_is_he_doing_now[gp.what_is_he_doing_now.length - 1]
+                .coordinate
+            }
+          />
+
+          <Card className="bg-[#12071c] border-purple-800/40 gap-2 p-5">
+            <h3 className="text-lg font-semibold text-green-400 flex items-center gap-2">
+              <CheckCircle2 className="w-5 h-5 " />
+              Backstory
             </h3>
 
             <p className="mt-3 whitespace-pre-line text-purple-300">
               {gp?.backstory}
             </p>
           </Card>
-
-          <RealityLocation coordinates={gp?.location_coordinates} />
-
           <Card className="bg-[#12071c] gap-2 border-purple-800/40 p-5">
-            <h3 className="text-lg text-purple-300 font-semibold mb-3 flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-yellow-400" />
+            <h3 className="text-lg text-yellow-400 font-semibold mb-3 flex items-center gap-2">
+              <Trophy className="w-5 h-5 " />
               Major Achievements
             </h3>
             <ul className="space-y-1 text-purple-300">
@@ -79,8 +102,8 @@ export default function RealityView({
           </Card>
 
           <Card className="bg-[#12071c] gap-2 border-purple-800/40 p-5">
-            <h3 className="text-lg text-purple-300 font-semibold mb-3 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-blue-400" />
+            <h3 className="text-lg text-blue-400 font-semibold mb-3 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 " />
               Personality Traits
             </h3>
             <ul className="space-y-1 text-purple-300">

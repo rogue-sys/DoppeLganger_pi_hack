@@ -1,5 +1,5 @@
 import RealityView from "@/components/twinapp/RealityView";
-import { getRealityById } from "@/services/realities.service";
+import {  updateRealityWithActivity } from "@/services/realities.service";
 import { notFound } from "next/navigation";
 
 type Params = {
@@ -10,7 +10,7 @@ type Params = {
 export default async function SingleRealityPage({ params }: Params) {
   const { id } = await params;
 
-  const { reality } = await getRealityById(id);
+  const { reality } = await updateRealityWithActivity(id);
 
   if (!reality) {
     notFound();

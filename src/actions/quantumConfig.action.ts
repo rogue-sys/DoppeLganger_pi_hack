@@ -29,18 +29,19 @@ export async function generateReality(quantumData: {
 
     // 3️⃣ Enhanced World-Building Prompt
     const systemPrompt = `
-You are an advanced world-simulation AI that generates detailed alternate-universe doppelganger identities.
-Your job is to merge the user’s real traits with the selected archetype + universe-focus,
+You are an advanced world-simulation AI tasked with generating detailed alternate-universe doppelganger identities.
+Your job is to merge the user’s real traits with the selected archetype and universe-focus,
 and produce a fully consistent, lore-accurate character profile.
 
-Your output MUST be:
-1. Only valid JSON
-2. Exactly matching the schema below
-3. Highly descriptive, imaginative, and immersive
-4. Internally consistent with all traits provided
-5. Free of any commentary, disclaimers, or extra text
+Your output MUST:
+1. Be valid JSON.
+2. Exactly match the RealityResult.generatedProfile schema.
+3. Be highly descriptive, imaginative, and immersive.
+4. Remain internally consistent with all traits provided.
+5. Include a "what_is_he_doing_now" array, structured as shown below, for future activities.
+6. Contain no commentary, disclaimers, or extra text outside the JSON.
 
-Your entire response must match this JSON schema EXACTLY:
+The generated JSON MUST match this schema exactly:
 
 {
   "archetype": "string",
@@ -48,6 +49,13 @@ Your entire response must match this JSON schema EXACTLY:
   "alternate_universe_dob": "string",
   "backstory": "1 paragraph, 6-10 sentences, very detailed and narrative",
   "personality_traits": ["trait1", "trait2", "trait3", "trait4", "trait5"],
+  "what_is_he_doing_now": [
+    {
+      "content": "Describe the current activity in vivid detail",
+      "time": "ISO 8601 timestamp",
+      "coordinate": "latitude, longitude or fictional coordinates"
+    }
+  ],
   "location_coordinates": "latitude, longitude",
   "daily_routine": "1 immersive narrative paragraph",
   "portrait": "Very detailed visual description (no image)",
@@ -79,14 +87,17 @@ Your entire response must match this JSON schema EXACTLY:
 
 REQUIREMENTS:
 - Archetype controls world logic, culture, tone.
-- Universe focus affects environment, lifestyle, worldview.
+- Universe focus affects environment, lifestyle, and worldview.
 - Personality must be a recognizable but exaggerated reflection of the user's traits.
 - Backstory must include origins, culture, environment, emotional depth, and major turning points.
 - Achievements must feel earned and specific.
 - Weaknesses must feel meaningful and psychologically grounded.
 - Coordinates MUST make sense for the world.
+- "what_is_he_doing_now" must be an array of objects with the structure:
+  { "content": "<activity description>", "time": "<ISO timestamp>", "coordinate": "<location>" }
 - NO extra text outside the JSON.
 `;
+
 
     const userQuery = `
 USER TRAITS:
@@ -107,30 +118,27 @@ SELECTED UNIVERSE INPUTS:
 - Core Personality Modifier: "${quantumData.corePersonality}"
 `;
 
-    // 4️⃣ Call Gemini API
     const aiOutput = await fetchGeminiContent(userQuery, systemPrompt);
 
-    // 5️⃣ Extract JSON safely
     let parsedOutput: any;
     try {
       const jsonMatch = aiOutput.match(/\{[\s\S]*\}/);
       if (!jsonMatch) throw new Error("No JSON found in AI output");
       parsedOutput = JSON.parse(jsonMatch[0]);
+      if (!Array.isArray(parsedOutput.what_is_he_doing_now)) {
+        parsedOutput.what_is_he_doing_now = [];
+      }
     } catch (err) {
       console.error("Failed to parse AI JSON:", err, aiOutput);
       return { success: false, error: "AI returned invalid JSON" };
     }
 
-    // 6️⃣ Save each result under `generatedProfile`
     const savedResult = await RealityResult.create({
       userId: new mongoose.Types.ObjectId(userId),
       generatedProfile: parsedOutput,
-      createdAt: new Date(),
     });
-
     console.log("Saved RealityResult _id:", savedResult._id);
 
-    revalidatePath("/");
 
     return { success: true, realityId: savedResult._id };
   } catch (err: any) {
@@ -138,3 +146,5 @@ SELECTED UNIVERSE INPUTS:
     return { success: false, error: err.message };
   }
 }
+
+

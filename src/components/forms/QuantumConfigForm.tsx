@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { createReality } from "@/actions/reality.action";
 
 export default function QuantumConfigForm() {
   const router = useRouter();
@@ -22,32 +23,16 @@ export default function QuantumConfigForm() {
     }
 
     setLoading(true);
-    try {
-      const response = await fetch("/api/reality", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          archetype: archetypeInput,
-          universeFocus: universeInput,
-          corePersonality: personalityInput,
-        }),
-      });
+    const result = await createReality({
+      archetype: archetypeInput,
+      universeFocus: universeInput,
+      corePersonality: personalityInput,
+    });
 
-      const result = await response.json();
-
-      if (result.success) {
-        toast.success("Reality generated!");
-        const realityId = result.realityId;
-        router.push(`/realities/${realityId}`);
-      } else {
-        toast.error(result.error || "Failed to generate reality");
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error("Server call failed");
-    } finally {
-      setLoading(false);
+    if (!result.success) {
+      toast.error(result.error || "Failed to generate reality");
     }
+    setLoading(false);
   };
 
   return (
@@ -63,7 +48,6 @@ export default function QuantumConfigForm() {
           </h2>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {/* Replaced Select with free text input */}
             <div className="space-y-2">
               <Label className="text-purple-300">Your π Archetype</Label>
               <Input

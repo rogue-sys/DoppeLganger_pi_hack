@@ -34,7 +34,9 @@ export default function RootLayout({
           <ScrollToTop />
         </Suspense>
         <NextTopLoader showSpinner={false} color="#BA8CFC" />
-        {children}
+        {/* <MonitorFrame> */}
+          {children}
+          {/* </MonitorFrame> */}
         <Toaster />
       </body>
     </html>
