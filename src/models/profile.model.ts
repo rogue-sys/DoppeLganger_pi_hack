@@ -4,7 +4,6 @@ export interface UserProfile {
   _id: Types.ObjectId;
   userId: Types.ObjectId;
   profile_pic: string;
-  imageUrls: string[];
 
   name: string;
   appearance: string;
@@ -44,10 +43,7 @@ const UserProfileSchema = new mongoose.Schema<IUserProfile>(
     },
 
 
-    imageUrls: {
-      type: [String],
-      default: [],
-    },
+ 
 
     appearance: {
       type: String,

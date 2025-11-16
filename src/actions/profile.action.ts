@@ -66,29 +66,9 @@ export async function saveCoreIdentity(formData: FormData) {
       profile_pic = (uploadResult as any)?.secure_url;
     }
 
-    const additionalFiles = formData.getAll("imageUrls") as File[];
-    const imageUrls: string[] = [];
+   
 
-    for (const file of additionalFiles) {
-      const arrayBuffer = await file.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
 
-      const uploadResult = await new Promise((resolve, reject) => {
-        cloudinary.uploader.upload_stream(
-          { folder: "user_profiles", resource_type: "image" },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result!);
-          }
-        ).end(buffer);
-      });
-
-      imageUrls.push((uploadResult as any)?.secure_url);
-    }
-
-    if (imageUrls.length < 3) {
-      return { success: false, error: "Please upload at least 3 additional images." };
-    }
 
       await Profile.findOneAndUpdate(
       { userId },
@@ -105,7 +85,6 @@ export async function saveCoreIdentity(formData: FormData) {
         place,
         name,
         ...(profile_pic && { profile_pic }),
-        ...(imageUrls.length > 0 && { imageUrls }),
       },
       { new: true, upsert: true, setDefaultsOnInsert: true }
     );

@@ -40,9 +40,6 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
 
   const router = useRouter();
 
-  const [additionalFiles, setAdditionalFiles] = useState<File[]>([]);
-  const [additionalPreviews, setAdditionalPreviews] = useState<string[]>([]);
-
   const [interestsInput, setInterestsInput] = useState<string>("");
 
   const profilePicInputRef = useRef<HTMLInputElement | null>(null);
@@ -83,22 +80,6 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
           setProfilePicFile(file);
         });
     }
-
-    if (initialData.imageUrls && initialData.imageUrls.length > 0) {
-      setAdditionalPreviews(initialData.imageUrls);
-
-      Promise.all(
-        initialData.imageUrls.map(async (url, i) => {
-          const res = await fetch(url);
-          const blob = await res.blob();
-          return new File([blob], `additional_${i}.jpg`, {
-            type: blob.type,
-          });
-        })
-      ).then((files) => {
-        setAdditionalFiles(files);
-      });
-    }
   }, [initialData, form]);
 
   useEffect(() => {
@@ -113,10 +94,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
   const MAX_ADDITIONAL_MB = 10;
   const MIN_ADDITIONAL_COUNT = 3;
 
-  function validateProfileImages(
-    profilePic: File | null,
-    additionalFiles: File[]
-  ) {
+  function validateProfileImages(profilePic: File | null) {
     if (!profilePic) {
       toast.error("Profile picture is required.");
       return false;
@@ -127,36 +105,11 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
       return false;
     }
 
-    if (additionalFiles.length < MIN_ADDITIONAL_COUNT) {
-      toast.error("Please upload at least 3 additional images.");
-      return false;
-    }
-
-    for (const file of additionalFiles) {
-      if (file.size > MAX_ADDITIONAL_MB * 1024 * 1024) {
-        toast.error(`${file.name} exceeds 10 MB.`);
-        return false;
-      }
-    }
-
     return true;
   }
-  useEffect(() => {
-    const previews: string[] = [];
-    additionalFiles.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        previews.push(reader.result as string);
-        if (previews.length === additionalFiles.length) {
-          setAdditionalPreviews(previews);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-  }, [additionalFiles]);
 
   const onSubmit = async (values: FullProfileData) => {
-    const isValid = validateProfileImages(profilePicFile, additionalFiles);
+    const isValid = validateProfileImages(profilePicFile);
     if (!isValid) return;
     setLoading(true);
     const formData = new FormData();
@@ -173,7 +126,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
     );
 
     if (profilePicFile) formData.append("profile_pic", profilePicFile);
-    additionalFiles.forEach((file) => formData.append("imageUrls", file));
+
     const result = await saveCoreIdentity(formData);
 
     setLoading(false);
@@ -194,7 +147,10 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
               <h2 className="text-xl font-semibold text-purple-200 ">
                 {initialData ? (
                   <span className="flex items-center flex-wrap gap-2">
-                    <BiArrowBack className="cursor-pointer" onClick={() => router.back()} />
+                    <BiArrowBack
+                      className="cursor-pointer"
+                      onClick={() => router.back()}
+                    />
                     Customize your profile
                   </span>
                 ) : (
@@ -230,42 +186,6 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                 />
               </div>
 
-              <FormItem>
-                <FormLabel className="text-purple-300">
-                  Additional images of you (min 3)
-                </FormLabel>
-                <FormControl>
-                  <>
-                    <div className="flex gap-3 flex-wrap">
-                      {additionalPreviews.map((preview, i) => (
-                        <img
-                          key={i}
-                          src={preview}
-                          alt={`Additional ${i + 1}`}
-                          className="w-24 h-24 object-cover rounded-lg border border-purple-500"
-                        />
-                      ))}
-                      <div
-                        onClick={() => additionalInputRef.current?.click()}
-                        className="w-24 h-24 flex items-center justify-center border border-dashed border-purple-500 rounded-lg cursor-pointer text-purple-300"
-                      >
-                        {additionalPreviews?.length > 1 ? "Change" : "Add"}
-                      </div>
-                    </div>
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      multiple
-                      ref={additionalInputRef}
-                      className="hidden"
-                      onChange={(e) =>
-                        setAdditionalFiles(Array.from(e.target.files || []))
-                      }
-                    />
-                  </>
-                </FormControl>
-              </FormItem>
-
               <div className="grid md:grid-cols-2 gap-5 ">
                 <FormField
                   control={form.control}
@@ -273,7 +193,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-purple-300">
-                        Full Name 
+                        Full Name
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -286,7 +206,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="dateOfBirth"

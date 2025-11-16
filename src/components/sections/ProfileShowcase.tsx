@@ -55,24 +55,7 @@ export default function ProfileShowcase({ profile }: { profile: any }) {
             </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold text-purple-300 mb-3">
-              Additional Photos
-            </h3>
-
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
-              {profile.imageUrls?.map((url: string, i: number) => (
-                <motion.img
-                  key={i}
-                  src={url}
-                  className="w-full h-28 sm:h-32 object-cover rounded-lg border border-purple-500/40"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.1 }}
-                />
-              ))}
-            </div>
-          </div>
+          
 
         </CardContent>
       </Card>
