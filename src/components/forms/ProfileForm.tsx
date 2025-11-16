@@ -249,7 +249,7 @@ export default function ProfileForm({ initialData }: CoreIdentityStepProps) {
                         onClick={() => additionalInputRef.current?.click()}
                         className="w-24 h-24 flex items-center justify-center border border-dashed border-purple-500 rounded-lg cursor-pointer text-purple-300"
                       >
-                        Add
+                        {additionalPreviews?.length > 1 ? "Change" : "Add"}
                       </div>
                     </div>
                     <Input

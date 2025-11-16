@@ -111,7 +111,6 @@ export default function RealityLocation({
         </MapContainer>
       </motion.div>
 
-      <p className="mt-4 text-purple-300">{coordinates}</p>
     </Card>
   );
 }

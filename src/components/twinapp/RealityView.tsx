@@ -79,10 +79,7 @@ export default function RealityView({
                 .coordinate
             }
           />
-{
-              gp.what_is_he_doing_now[gp.what_is_he_doing_now.length - 1]
-                .coordinate
-            }
+
           <Card className="bg-[#12071c] border-purple-800/40 gap-2 p-5">
             <h3 className="text-lg font-semibold text-green-400 flex items-center gap-2">
               <CheckCircle2 className="w-5 h-5 " />
