@@ -45,6 +45,7 @@ export const getProfile = async (): Promise<{
       | UserProfile
       | null;
 
+
     return {
       success: true,
       data: {

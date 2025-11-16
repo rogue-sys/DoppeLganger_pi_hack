@@ -18,7 +18,10 @@ export async function saveCoreIdentity(formData: FormData) {
 
     const userId = session.user.id;
 
+
     const json = JSON.parse(formData.get("data") as string);
+
+
     const parsed = FullProfileSchema.safeParse(json);
 
     if (!parsed.success) {
@@ -39,7 +42,9 @@ export async function saveCoreIdentity(formData: FormData) {
       gender,
       interests,
       preference,
+      place,
     } = parsed.data;
+
 
     let profile_pic: string | undefined;
     const profilePicFile = formData.get("profile_pic") as File | null;
@@ -84,7 +89,7 @@ export async function saveCoreIdentity(formData: FormData) {
       return { success: false, error: "Please upload at least 3 additional images." };
     }
 
-     await Profile.findOneAndUpdate(
+     const profile = await Profile.findOneAndUpdate(
       { userId },
       {
         appearance,
@@ -96,12 +101,13 @@ export async function saveCoreIdentity(formData: FormData) {
         gender,
         interests,
         preference,
+        place,
         ...(profile_pic && { profile_pic }),
         ...(imageUrls.length > 0 && { imageUrls }),
       },
       { new: true, upsert: true, setDefaultsOnInsert: true }
     );
-
+    
   } catch (err: any) {
     console.error(`SAVE CORE IDENTITY ERROR for user:`, err);
     return { success: false, error: err.message };

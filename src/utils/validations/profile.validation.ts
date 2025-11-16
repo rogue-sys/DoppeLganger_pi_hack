@@ -10,6 +10,7 @@ export const FullProfileSchema = z.object({
   gender: z.string().min(1, "Gender is required"),
   interests: z.array(z.string().min(1)).min(1, "At least one interest is required"),
   preference: z.string().min(1, "Preference is required"),
+  place:  z.string().min(1, "place is required"),
 });
 
 export type FullProfileData = z.infer<typeof FullProfileSchema>;
