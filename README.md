@@ -1,147 +1,33 @@
-# 🌌 AI π Dimension
+# π Dimension
 
-**AI π Dimension** is a fun, chaotic, and creative web application that generates an alternate-universe version of a user based on their photo and personal details.  
-Users can explore their fictional twin through interactive option-based panels instead of receiving all info at once.  
-Perfect for hackathons, demos, and AI experimentation.
+π Dimension is an AI-powered alternate-universe identity generator.  
+Users upload their images, choose an archetype and universe theme, and the system generates a fully immersive “pi reality” — including backstory, personality, achievements, daily routine, secrets, and more.  
+It then generated and givesthe complete user's appearance and their alternate-universe profile.
 
----
-
-## 🚀 Overview
-
-This application creates a fully fictional “alternate self” of the user using AI.  
-After uploading their image and traits, the system generates:
-
-- A new **AI portrait**
-- A custom **alternate personality**
-- A fictional **backstory**
-- Strange, fun **life stats**
-- A unique **alternate date of birth**
-- A fictional **location with coordinates**
-- Many more selectable details
-
-Each user’s π is saved to their account, making the experience persistent across logins.
+This project uses:
+- Gemini Flash for text-based reality generation   
+- Next.js + TypeScript for the frontend  
+- Cloudinary for image handling  
 
 ---
 
-## 🧠 Core Concept
+## 🚀 Run Locally
 
-Instead of showing everything at once, the app reveals the π in **separate, clickable sections**, such as:
+```bash
+# 1. Clone the repository
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
 
-- Alternate Date of Birth  
-- Personality  
-- Backstory  
-- Location Coordinates  
-- Career  
-- Lifestyle & Daily Routine  
-- Friends & Rivals  
-- Secrets & Weird Habits  
+# 2. Install dependencies
+npm install
 
-Each panel is AI-generated on demand.
+# 3. Add environment variables
+# Create a `.env.local` file and include:
+# GOOGLE_API_KEY=<your gemini key>
+# CLOUDINARY_URL=<your cloudinary url>
 
----
+# 4. Start the development server
+npm run dev
 
-## 🧩 User Input
-
-The system collects:
-
-- **User Image**
-- **Height, weight, physical traits**
-- **Date of Birth**
-- **Optional personality or lifestyle traits**
-- **Chosen π Archetype**, such as:
-
-  - Rich Millionaire  
-  - Poor Villager  
-  - Ancient Human / Caveman  
-  - King / Queen  
-  - Cyberpunk Hacker  
-  - Evil Twin  
-  - Wizard / Sorcerer  
-  - Warrior / Samurai  
-  - Time Traveler  
-  - Space Explorer  
-  - Alien Hybrid  
-  - Retired Uncle Version  
-
-*(Fully customizable; more can be added)*
-
----
-
-## 🎨 Output (What the App Generates)
-
-### 1️⃣ **AI-Generated Portrait**
-A new avatar created from:
-- The user’s real photo  
-- The chosen archetype  
-- Stylized AI rendering  
-
-### 2️⃣ **Interactive Details Panels**
-Each detail is shown only when clicked:
-
-- **Alternate Universe DOB**  
-- **Backstory Paragraph**  
-- **Personality Traits**  
-- **Location Coordinates**  
-- **Daily Routine**  
-- **Major Achievements**  
-- **Strengths & Weaknesses**  
-- **Friends / Rivals**  
-- **Secrets / Quirks**  
-- **Favorite Quotes**  
-
----
-
-## 🔐 Account System
-
-- Users must **create an account**.
-- Their π is **saved** in the database.
-- They can view it every time they log in.
-- They may **reset** to generate a brand new alternate version.
-
----
-
-## 🛠️ Tech Stack
-
-### **Frontend**
-- Next.js (React + App Router)
-- TailwindCSS / ShadCN (optional)
-
-### **AI / Backend**
-- OpenAI API (Text + Image Generation)
-- Anthropic (optional)
-- Node API Routes (Next.js Server Actions)
-
-### **Auth**
-- Manual Auth
-
-### **Database**
-- MongoDB (using Mongoose or Prisma)  
-
-### **Hosting**
-- Vercel (recommended for Next.js)
-
----
-
-## 🎯 Why This Fits the Hackathon Theme
-
-### ✔ **The App Nobody Asked For**  
-Nobody needs an alternate-universe version of themselves — yet it’s impossible to stop exploring.
-
-## 🧪 Demo Flow (Under 4 Minutes)
-
-1. User logs in → dashboard shown  
-2. Upload image + fill traits → choose archetype  
-3. AI generates the **π Portrait**  
-4. Click to reveal:
-   - Personality  
-   - Backstory  
-   - Location  
-   - Date of Birth  
-   - Quirks  
-5. Show full profile card  
-6. Option to regenerate a new alternate self  
-
----
-
-## 🗂️ Project Structure (Next.js)
-
+# Your app will be live at:
+# http://localhost:3000
